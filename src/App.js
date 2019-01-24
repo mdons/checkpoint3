@@ -1,8 +1,29 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import logo from "./logo.svg";
+import "./App.css";
+import Twitter from "twitter";
+import config from "./config.js";
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.twitter = new Twitter(config);
+  }
+
+  getData = () => {
+    let params = {
+      q: "akshay",
+      count: 100
+    };
+    this.twitter.get("search/tweets", params, (err, data, response) => {
+      console.log(data);
+    });
+  };
+
+  componentDidMount = () => {
+    this.getData();
+  };
+
   render() {
     return (
       <div className="App">
