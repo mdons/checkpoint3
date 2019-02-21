@@ -10,18 +10,28 @@ class App extends Component {
     this.twitter = new Twitter(config);
   }
 
-  getData = () => {
-    let params = {
-      q: "akshay",
-      count: 100
-    };
-    this.twitter.get("search/tweets", params, (err, data, response) => {
-      console.log(data);
-    });
-  };
+  // getData = () => {
+  //   let params = {
+  //     q: "akshay",
+  //     count: 100
+  //   };
+  //   this.twitter.get("search/tweets", params, (err, data, response) => {
+  //     console.log(data);
+  //   });
+  // };
 
   componentDidMount = () => {
-    this.getData();
+    // this.getData();
+    fetch(
+      "https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=twitterapi&count=2"
+    )
+      .then(response => {
+        console.log(response);
+        return response.json();
+      })
+      .then(data => {
+        console.log(data);
+      });
   };
 
   render() {
